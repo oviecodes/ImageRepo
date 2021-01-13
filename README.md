@@ -2,7 +2,7 @@
 The Shopify Technical Challenge Backend Solution.
 This is an API that uses AWS-s3 to store images, then stores the returned url in mongodb along with the details of the Image supplied by the user. It also allows authorized users to delete images from AWS-s3 as well as mongodb.
 
-## setting up aws-s3
+## Setting up aws-s3
 Get your **accessKeyId** and **secretAccessKey** from your Aws console, and also create an s3 **bucket**.
 
 create a .env file with and set the following environment variables
@@ -13,6 +13,12 @@ create a .env file with and set the following environment variables
 A fourth environment variable is also needed but it's not for aws configuration. It has to do with JWT.
 
 - SECRET_KEY = yourSecret
+
+## How to run application
+
+- Install nodemon globally(using npm or yarn)
+- yarn dev (starts development server)
+- yarn start (starts production server)
 
 ## Signup - POST '/users/signup'
 To signup using the API make a POST request to '/users/signup'
