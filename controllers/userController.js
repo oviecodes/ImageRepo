@@ -65,7 +65,7 @@ const loginUser = async (req, res) => {
 }
 
 
-//get all images by a particular author/owner
+//get all images by a particular user
 const getUserImages = async (req, res) => {
     const authorId = req.params.id
     //get all images belonging to a specific user

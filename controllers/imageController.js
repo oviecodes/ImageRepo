@@ -5,13 +5,27 @@ const deleteFromBucket = require('../services/deleteFromBucket')
 const singleUpload = upload.single("image")
 const Image = require('../models/images')
 
+
+//get images belonging to the current user
+const getMyImages = async (req, res) => {
+    try {
+        //get all images belonging to a specific user
+        const authorImages = await Image.find({ author: req.user.id })
+            .populate({ path: 'author', select: '-password' })
+            .exec()
+        res.send(authorImages)
+    } catch (error) {
+        res.json({ msg: `an error occurred` })
+    } 
+}
+
 const getAllImages = async (req, res) => {
     try {
         const allImages = await Image.find({}).exec()
         res.send(allImages)
     } catch (error) {
         res.json({ msg: `an error occurred` })
-    } 
+    }
 }
 
 const uploadImage = async (req, res) => {
@@ -72,6 +86,7 @@ const deleteImage = async (req, res) => {
 }
 
 module.exports = {
+    getMyImages,
     getAllImages,
     uploadImage,
     getImageDetails,
