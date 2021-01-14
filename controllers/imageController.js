@@ -10,10 +10,13 @@ const Image = require('../models/images')
 const getMyImages = async (req, res) => {
     try {
         //get all images belonging to a specific user
-        const authorImages = await Image.find({ author: req.user.id })
+        const myImages = await Image.find({ author: req.user.id })
             .populate({ path: 'author', select: '-password' })
             .exec()
-        res.send(authorImages)
+        if (!myImages) {
+            return res.status(404).json({ msg: 'you does not have any images'})
+        }
+        res.send(myImages)
     } catch (error) {
         res.json({ msg: `an error occurred` })
     } 
@@ -65,7 +68,7 @@ const getImageDetails = async (req, res) => {
         .populate({ path: 'author', select: '-password' })
         .exec()
     if (!imageDetail) {
-        return res.status(404).json('Image does not exist')
+        return res.status(404).json({ msg: 'Image does not exist'})
     }
     res.send(imageDetail)
 }

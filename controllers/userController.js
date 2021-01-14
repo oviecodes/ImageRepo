@@ -73,7 +73,7 @@ const getUserImages = async (req, res) => {
         .populate({ path: 'author', select: '-password' })
         .exec()
     if (!authorImages) {
-        return res.status(404).json('author does not have any images')
+        return res.status(404).json({ msg: 'author does not have any images'})
     }
     res.send(authorImages)
 }
