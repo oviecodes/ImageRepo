@@ -34,7 +34,7 @@ const upload = multer({
       cb(null, { fieldName: "TEST" });
     },
     key: function (req, file, cb) {
-      cb(null, `${uuid()}_${Date.now().toString()}_${path.extname(file.originalname)}`);
+      cb(null, `${uuid()}_${Date.now().toString()}${path.extname(file.originalname)}`);
     },
   }),
 });
