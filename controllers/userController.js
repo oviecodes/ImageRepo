@@ -72,6 +72,9 @@ const getUserImages = async (req, res) => {
     const authorImages = await Image.find({ author: authorId })
         .populate({ path: 'author', select: '-password' })
         .exec()
+    if (!authorImages) {
+        return res.status(404).json('author does not have any images')
+    }
     res.send(authorImages)
 }
 

@@ -34,7 +34,7 @@ const uploadImage = async (req, res) => {
         const title = req.body.name
         const description = req.body.desc
         if (err) {
-            return res.json({
+            return res.status(404).json({
                 success: false,
                 errors: {
                     title: "Image Upload Error",
@@ -50,7 +50,7 @@ const uploadImage = async (req, res) => {
                     description,
                     author: req.user.id 
                }) 
-                return res.json({ newImage })
+                return res.status(200).json({ newImage })
             } catch (e) {
                 return res.json({ msg: `an error occurred` })
             }
@@ -64,6 +64,9 @@ const getImageDetails = async (req, res) => {
     const imageDetail = await Image.findById(req.params.id)
         .populate({ path: 'author', select: '-password' })
         .exec()
+    if (!imageDetail) {
+        return res.status(404).json('Image does not exist')
+    }
     res.send(imageDetail)
 }
 
@@ -73,14 +76,14 @@ const deleteImage = async (req, res) => {
     const image = await Image.findById(req.params.id)
 
     if (!image) {
-        return res.json({ msg: `image does not exist` })
+        return res.status(404).json({ msg: `image does not exist` })
     }
-    const Key = image.url.split('/')[3]
+    const [ ...others, Key ] = image.url.split('/')
 
     if (req.user.id == image.author) {
         await Image.findByIdAndDelete(image.id)
         deleteFromBucket(Key)
-        return res.json({ msg: `Image has been deleted` })
+        return res.status(200).json({ msg: `Image has been deleted` })
     } 
     res.status(401).json({ msg: `you cannot delete the image` })
 }
