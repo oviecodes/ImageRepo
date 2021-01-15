@@ -81,7 +81,7 @@ const deleteImage = async (req, res) => {
     if (!image) {
         return res.status(404).json({ msg: `image does not exist` })
     }
-    const [ ...others, Key ] = image.url.split('/')
+    const Key = image.url.split('/')[3]
 
     if (req.user.id == image.author) {
         await Image.findByIdAndDelete(image.id)
