@@ -1,5 +1,4 @@
-# ImageRepo
-The Shopify Technical Challenge Backend Solution.
+# ImageRepo - The Shopify Technical Challenge Backend Solution.
 This is an API that uses AWS-s3 to store images, then stores the returned url in mongodb along with the details of the Image supplied by the user. It also allows authorized users to delete images from AWS-s3 as well as mongodb.
 
 ## Setting up aws-s3
