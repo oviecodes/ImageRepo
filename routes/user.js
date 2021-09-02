@@ -7,17 +7,17 @@ const { createUser, loginUser, getUserImages } = require('../controllers/userCon
 
 
 router.route('/')
-    .get()
+	.get()
 
 router.route('/signup')
-    .post(createUser)
+	.post(createUser)
 
 router.route('/login')
-    .post(loginUser)
+	.post(loginUser)
 
 router.route('/:id')
-    .all(passport.authenticate('jwt', { session: false }))
-    .get(getUserImages)
+	.all(passport.authenticate('jwt', { session: false }))
+	.get(getUserImages)
     
 
 

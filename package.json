@@ -4,8 +4,11 @@
   "description": "A solution to the shopify internship challenge",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js",
-    "start": "node app.js"
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
   },
   "author": "Godwin Alexander",
   "license": "MIT",
@@ -24,5 +27,11 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^7.32.0",
+    "jest": "^27.1.0",
+    "supertest": "^6.1.6"
   }
 }

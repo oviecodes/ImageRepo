@@ -6,16 +6,16 @@ const passport = require('passport')
 const { getMyImages, getAllImages, uploadImage, getImageDetails, deleteImage } = require('../controllers/imageController')
 
 router.route('/')
-    .all(passport.authenticate('jwt', { session: false }))
-    .get(getMyImages)
-    .post(uploadImage)
+	.all(passport.authenticate('jwt', { session: false }))
+	.get(getMyImages)
+	.post(uploadImage)
 
 router.route('/market')
-    .get(getAllImages)
+	.get(getAllImages)
 
 router.route('/:id')
-    .all(passport.authenticate('jwt', { session: false }))
-    .get(getImageDetails)
-    .delete(deleteImage)
+	.all(passport.authenticate('jwt', { session: false }))
+	.get(getImageDetails)
+	.delete(deleteImage)
 
 module.exports = router
